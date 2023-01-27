@@ -23,6 +23,7 @@ router.post("", (req, res, next) => {
 router.get("/:name", (req, res, next) => {
   try {
     let foundItem = Item.findItem(req.params.name);
+    return res.json({ item: foundItem });
   } catch (err) {
     return next(err);
   }
@@ -32,6 +33,15 @@ router.patch("/:name", (req, res, next) => {
   try {
     let foundItem = Item.update(req.params.name, req.body);
     return res.json({ item: foundItem });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+router.delete("/:name", (req, res, next) => {
+  try {
+    Item.remove(req.params.name);
+    return res.json({ message: "deleted" });
   } catch (err) {
     return next(err);
   }
