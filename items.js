@@ -26,6 +26,14 @@ class Item {
     foundItem.price = data.price;
     return foundItem;
   }
+
+  static remove(name) {
+    let found = items.findIndex((i) => i.name === name);
+    if (found === -1) {
+      throw { message: "not found", status: 404 };
+    }
+    items.splice(found, 1);
+  }
 }
 
 module.exports = Item;
